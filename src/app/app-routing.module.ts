@@ -1,8 +1,7 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
-import { AppLayoutComponent } from './layout/app.layout.component';
-import { HomeComponent } from './pages/home/home.component';
+import { DashboardLayoutComponent } from './layout/app.layout.component';
 
 @NgModule({
     imports: [
@@ -10,7 +9,14 @@ import { HomeComponent } from './pages/home/home.component';
             [
                 {
                     path: '',
-                    component: AppLayoutComponent,
+                    loadChildren: () =>
+                        import('./demo/components/pages/pages.module').then(
+                            (m) => m.PagesModule
+                        ),
+                },
+                {
+                    path: 'dashboard',
+                    component: DashboardLayoutComponent,
                     children: [
                         {
                             path: '',
@@ -26,13 +32,13 @@ import { HomeComponent } from './pages/home/home.component';
                                     './demo/components/uikit/uikit.module'
                                 ).then((m) => m.UIkitModule),
                         },
-                        {
-                            path: 'pages',
-                            loadChildren: () =>
-                                import(
-                                    './demo/components/pages/pages.module'
-                                ).then((m) => m.PagesModule),
-                        },
+                        // {
+                        //     path: 'pages',
+                        //     loadChildren: () =>
+                        //         import(
+                        //             './demo/components/pages/pages.module'
+                        //         ).then((m) => m.PagesModule),
+                        // },
                     ],
                 },
                 {
@@ -42,9 +48,6 @@ import { HomeComponent } from './pages/home/home.component';
                             (m) => m.AuthModule
                         ),
                 },
-                { path: 'notfound', component: NotfoundComponent },
-                { path: '**', redirectTo: '/notfound' },
-                { path: 'home', component: HomeComponent },
             ],
             {
                 scrollPositionRestoration: 'enabled',

@@ -9,7 +9,7 @@ import { AppTopBarComponent } from './app.topbar.component';
     selector: 'app-layout',
     templateUrl: './app.layout.component.html'
 })
-export class AppLayoutComponent implements OnDestroy {
+export class DashboardLayoutComponent implements OnDestroy {
 
     overlayMenuOpenSubscription: Subscription;
 
