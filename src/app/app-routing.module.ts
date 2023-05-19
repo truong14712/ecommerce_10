@@ -2,7 +2,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AdminLayoutComponent } from './layout/app.layout.component';
-import { UserLayoutComponent } from './layout/user.layout.module';
+// import { UserLayoutComponent } from './layout/user.layout.module';
 
 @NgModule({
     imports: [
