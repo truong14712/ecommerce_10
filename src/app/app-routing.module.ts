@@ -15,7 +15,7 @@ import { DashboardLayoutComponent } from './layout/app.layout.component';
                         ),
                 },
                 {
-                    path: 'dashboard',
+                    path: 'admin',
                     component: DashboardLayoutComponent,
                     children: [
                         {
@@ -25,13 +25,13 @@ import { DashboardLayoutComponent } from './layout/app.layout.component';
                                     './demo/components/dashboard/dashboard.module'
                                 ).then((m) => m.DashboardModule),
                         },
-                        {
-                            path: 'uikit',
-                            loadChildren: () =>
-                                import(
-                                    './demo/components/uikit/uikit.module'
-                                ).then((m) => m.UIkitModule),
-                        },
+                        // {
+                        //     path: 'uikit',
+                        //     loadChildren: () =>
+                        //         import(
+                        //             './demo/components/uikit/uikit.module'
+                        //         ).then((m) => m.UIkitModule),
+                        // },
                         // {
                         //     path: 'pages',
                         //     loadChildren: () =>
@@ -48,6 +48,7 @@ import { DashboardLayoutComponent } from './layout/app.layout.component';
                             (m) => m.AuthModule
                         ),
                 },
+                { path: '**', component: NotfoundComponent }
             ],
             {
                 scrollPositionRestoration: 'enabled',
