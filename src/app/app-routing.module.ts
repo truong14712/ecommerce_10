@@ -1,7 +1,8 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
-import { DashboardLayoutComponent } from './layout/app.layout.component';
+import { AdminLayoutComponent } from './layout/app.layout.component';
+import { UserLayoutComponent } from './layout/user.layout.module';
 
 @NgModule({
     imports: [
@@ -16,29 +17,15 @@ import { DashboardLayoutComponent } from './layout/app.layout.component';
                 },
                 {
                     path: 'admin',
-                    component: DashboardLayoutComponent,
+                    component: AdminLayoutComponent,
                     children: [
                         {
                             path: '',
                             loadChildren: () =>
                                 import(
-                                    './demo/components/dashboard/dashboard.module'
+                                    './demo/components/admin/admin.module'
                                 ).then((m) => m.DashboardModule),
                         },
-                        // {
-                        //     path: 'uikit',
-                        //     loadChildren: () =>
-                        //         import(
-                        //             './demo/components/uikit/uikit.module'
-                        //         ).then((m) => m.UIkitModule),
-                        // },
-                        // {
-                        //     path: 'pages',
-                        //     loadChildren: () =>
-                        //         import(
-                        //             './demo/components/pages/pages.module'
-                        //         ).then((m) => m.PagesModule),
-                        // },
                     ],
                 },
                 {

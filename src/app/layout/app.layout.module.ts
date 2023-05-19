@@ -16,7 +16,7 @@ import { AppTopBarComponent } from './app.topbar.component';
 import { AppFooterComponent } from './app.footer.component';
 import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
-import { DashboardLayoutComponent } from "./app.layout.component";
+import { AdminLayoutComponent } from "./app.layout.component";
 
 @NgModule({
     declarations: [
@@ -25,7 +25,7 @@ import { DashboardLayoutComponent } from "./app.layout.component";
         AppFooterComponent,
         AppMenuComponent,
         AppSidebarComponent,
-        DashboardLayoutComponent,
+        AdminLayoutComponent,
     ],
     imports: [
         BrowserModule,
@@ -41,6 +41,6 @@ import { DashboardLayoutComponent } from "./app.layout.component";
         RouterModule,
         AppConfigModule
     ],
-    exports: [DashboardLayoutComponent]
+    exports: [AdminLayoutComponent]
 })
 export class AppLayoutModule { }
