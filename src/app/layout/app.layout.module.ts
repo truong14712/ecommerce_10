@@ -17,6 +17,7 @@ import { AppFooterComponent } from './app.footer.component';
 import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AdminLayoutComponent } from "./app.layout.component";
+import { UserLayoutComponent } from './user-layout/user-layout.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { AdminLayoutComponent } from "./app.layout.component";
         AppMenuComponent,
         AppSidebarComponent,
         AdminLayoutComponent,
+        UserLayoutComponent,
     ],
     imports: [
         BrowserModule,
