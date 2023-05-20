@@ -1,37 +1,36 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {
+    HttpClient,
+    HttpErrorResponse,
+    HttpHeaders,
+} from '@angular/common/http';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { Product } from '../api/product';
-
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class ProductService {
-
-    constructor(private http: HttpClient) { }
-
-    getProductsSmall() {
-        return this.http.get<any>('assets/demo/data/products-small.json')
-            .toPromise()
-            .then(res => res.data as Product[])
-            .then(data => data);
+    constructor(private http: HttpClient) {}
+    private apiUrl = 'https://fakestoreapi.com/products';
+    getAllProduct(): Observable<any> {
+        return this.http.get(this.apiUrl);
+    }
+    getDetail(id: string): Observable<any> {
+        const url = `${this.apiUrl}/${id}`;
+        return this.http.get<any>(url);
     }
 
-    getProducts() {
-        return this.http.get<any>('assets/demo/data/products.json')
-            .toPromise()
-            .then(res => res.data as Product[])
-            .then(data => data);
+    createProduct(product: Product): Observable<any> {
+        return this.http.post<any>(this.apiUrl, product);
     }
 
-    getProductsMixed() {
-        return this.http.get<any>('assets/demo/data/products-mixed.json')
-            .toPromise()
-            .then(res => res.data as Product[])
-            .then(data => data);
+    updateProduct(id: string, product: Product): Observable<any> {
+        const url = `${this.apiUrl}/${id}`;
+        return this.http.put<any>(url, product);
     }
 
-    getProductsWithOrdersSmall() {
-        return this.http.get<any>('assets/demo/data/products-orders-small.json')
-            .toPromise()
-            .then(res => res.data as Product[])
-            .then(data => data);
+    deleteProduct(id: string): Observable<any> {
+        const url = `${this.apiUrl}/${id}`;
+        return this.http.delete<any>(url);
     }
 }
