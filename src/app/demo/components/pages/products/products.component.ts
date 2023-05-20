@@ -5,20 +5,19 @@ import { SelectItem } from 'primeng/api';
 import { DataView } from 'primeng/dataview';
 import { Router } from '@angular/router';
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
+  selector: 'app-products',
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.scss']
 })
-export class HomeComponent implements OnInit {
-    constructor(
-        private productService: ProductService,
-        private router: Router
-    ) {}
+export class ProductsComponent implements OnInit {
+
+    constructor(private productService: ProductService,private router: Router) {}
     products: Product[] = [];
     sortOptions: SelectItem[] = [];
     sortOrder: number = 0;
 
     sortField: string = '';
+
 
     orderCities: any[] = [];
     ngOnInit() {
@@ -52,7 +51,7 @@ export class HomeComponent implements OnInit {
         console.log(dv);
         dv.filter((event.target as HTMLInputElement).value);
     }
-    navigateToDetail(productId: string) {
+    navigateToDetail(productId:string){
         this.router.navigate(['products/detail', productId]);
     }
 }
