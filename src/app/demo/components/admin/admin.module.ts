@@ -24,6 +24,7 @@ import { ProductManagement } from './productManagement/productManagement.compone
 
 //để nguyên
 import { DashboardsRoutingModule } from './admin-routing.module';
+import { CategoryManagement } from './categoryManagement/categoryManagement.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -50,6 +51,6 @@ import { DashboardsRoutingModule } from './admin-routing.module';
         InputNumberModule,
         DialogModule,
     ],
-    declarations: [DashboardComponent, ProductManagement],
+    declarations: [DashboardComponent, ProductManagement,CategoryManagement],
 })
 export class DashboardModule {}
