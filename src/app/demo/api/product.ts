@@ -3,14 +3,14 @@ interface InventoryStatus {
     value: string;
 }
 export interface Product {
-    id?: string;
+    _id?: string;
     code?: string;
     name?: string;
     description?: string;
     price?: number;
     quantity?: number;
     inventoryStatus?: InventoryStatus;
-    category?: string;
+    categoryId?: string;
     image?: string;
     rating?: number;
 }
