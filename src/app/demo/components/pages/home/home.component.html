@@ -1,7 +1,7 @@
 <div class="">
 	<div class="col-12">
 		<div class="card">
-			<h5>List Product</h5>
+			<h5 class="name_product">Danh Sách Sản Phẩm</h5>
 			<p-dataView #dv [value]="products" [paginator]="true" [rows]="9" filterBy="title" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
 				<ng-template pTemplate="header">
 					<div class="flex flex-column md:flex-row md:justify-content-between gap-2">
@@ -38,7 +38,7 @@
 
 				<ng-template let-product pTemplate="gridItem">
 					<div class="col-12 md:col-4 gap-2">
-						<div class="card m-3 border-1 surface-border h-full">
+						<div class="card m-3 border-1 surface-border ">
 							<div class="flex flex-wrap gap-2 align-items-center justify-content-between mb-2">
 								<div class="flex align-items-center">
 									<i class="pi pi-tag mr-2"></i>
@@ -47,12 +47,12 @@
 								<span [class]="'product-badge status-' ">{{product.inventoryStatus}}</span>
 							</div>
 							<div class="flex flex-column align-items-center text-center mb-3">
-								<img [src]="product.image" [alt]="product.title" class="w-4 shadow-2 my-3 mx-0"/>
-								<div class="text-2xl font-bold">{{product.title}}</div>
-								<div class="mb-3 p-5">{{product.description}}</div>
+								<img [src]="product.image" [alt]="product.title" class="w-4 shadow-2 my-3 mx-0 product_image"/>
+								<div class="text-2xl font-bold h-40 product_title">{{product.title}}</div>
+								<div class="mb-3 p-5 product-desc">{{product.description}}</div>
 								<p-rating [ngModel]="product.rating.rate" [readonly]="true" [cancel]="false"></p-rating>
 							</div>
-							<div class="flex align-items-center justify-content-between">
+							<div class="flex align-items-center justify-content-between mt-3">
 								<span class="text-2xl font-semibold">${{product.price}}</span>
                                 <button pButton pRipple type="button" label="View Details" class="p-button-info"
                                 (click)="navigateToDetail(product.id)"
@@ -65,4 +65,7 @@
 			</p-dataView>
 		</div>
 	</div>
+
+	
+
 </div>

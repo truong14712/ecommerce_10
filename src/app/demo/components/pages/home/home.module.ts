@@ -22,7 +22,6 @@ import { ButtonModule } from 'primeng/button';
 		DropdownModule,
 		RatingModule,
 		ButtonModule,
-
     ],
     declarations: [HomeComponent]
 })

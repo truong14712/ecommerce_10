@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
+import { ButtonModule } from 'primeng/button';
+import { ProductDetailsComponent } from './productDetails/productDetails.component';
 
 @NgModule({
-    declarations: [],
+    declarations: [ProductDetailsComponent],
     imports: [
         CommonModule,
-        PagesRoutingModule
+        PagesRoutingModule,
+        ButtonModule
     ]
 })
 export class PagesModule { }

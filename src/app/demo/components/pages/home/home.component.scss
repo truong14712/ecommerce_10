@@ -1,0 +1,20 @@
+.name_product{
+   font-weight: bold;
+   font-size: 20px;
+}
+.product_image{
+   height:200px;
+}
+.product-desc{
+   height:180px;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   line-height: 25px;
+   -webkit-line-clamp: 3;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+}
+.product_title{
+   height:70px;
+   margin-top: 8px;
+}
