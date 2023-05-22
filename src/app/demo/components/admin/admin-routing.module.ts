@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CrudComponent } from './crud/crud.component';
+import { ProductManagement } from './productManagement/productManagement.component';
 
 @NgModule({
-    imports: [RouterModule.forChild([
-        { path: 'dashboard', component: DashboardComponent },
-        { path: 'crud', component:CrudComponent },
-    ])],
-    exports: [RouterModule]
+    imports: [
+        RouterModule.forChild([
+            { path: 'dashboard', component: DashboardComponent },
+            { path: 'products', component: ProductManagement },
+        ]),
+    ],
+    exports: [RouterModule],
 })
-export class DashboardsRoutingModule { }
+export class DashboardsRoutingModule {}
