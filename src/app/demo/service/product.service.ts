@@ -11,12 +11,13 @@ import { Product } from '../api/product';
 })
 export class ProductService {
     constructor(private http: HttpClient) {}
-    private apiUrl = 'https://fakestoreapi.com/products';
+    // https://fakestoreapi.com/products
+    private apiUrl = 'http://localhost:8000/api';
     getAllProduct(): Observable<any> {
-        return this.http.get(this.apiUrl);
+        return this.http.get(`${this.apiUrl}/products`);
     }
     getDetail(id: string): Observable<any> {
-        const url = `${this.apiUrl}/${id}`;
+        const url = `${this.apiUrl}/product/${id}`;
         return this.http.get<any>(url);
     }
 

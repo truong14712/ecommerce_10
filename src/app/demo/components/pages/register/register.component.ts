@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
         name: new FormControl(''),
         email: new FormControl(''),
         password: new FormControl(''),
+        confirmPassword: new FormControl(''),
     });
     valCheck: string[] = ['remember'];
 
