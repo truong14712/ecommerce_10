@@ -62,6 +62,7 @@ export class CategoryManagement implements OnInit {
     editProduct(category: Category) {
         this.product = { ...category };
         this.productDialog = true;
+        console.log(this.product);
     }
 
     deleteProduct(category: Category) {
@@ -85,6 +86,11 @@ export class CategoryManagement implements OnInit {
 
     confirmDelete() {
         this.deleteProductDialog = false;
+        this.categoryService
+            .deleteCategory(this.product?._id)
+            .subscribe((res) => {
+                console.log(res);
+            });
         this.products = this.products.filter(
             (val) => val._id !== this.product._id
         );
@@ -110,6 +116,12 @@ export class CategoryManagement implements OnInit {
                 // @ts-ignore
                 this.products[this.findIndexById(this.product._id)] =
                     this.product;
+                console.log(this.product);
+                this.categoryService
+                    .updateCategory(this.product)
+                    .subscribe((res) => {
+                        console.log(res);
+                    });
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -117,9 +129,15 @@ export class CategoryManagement implements OnInit {
                     life: 3000,
                 });
             } else {
-                this.product._id = this.createId();
+                this.categoryService
+                    .createCategory(this.product)
+                    .subscribe((res) => {
+                        this.product = res.data;
+                    });
+                this.categoryService.getAllCategory().subscribe((res) => {
+                    this.products = res;
+                });
                 // @ts-ignore
-                this.products.push(this.product);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -144,16 +162,6 @@ export class CategoryManagement implements OnInit {
         }
 
         return index;
-    }
-
-    createId(): string {
-        let id = '';
-        const chars =
-            'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
     }
 
     onGlobalFilter(table: Table, event: Event) {
