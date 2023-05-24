@@ -85,8 +85,8 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="code">
-                            Id <p-sortIcon field="code"></p-sortIcon>
+                        <th pSortableColumn="_id">
+                            Id <p-sortIcon field="_id"></p-sortIcon>
                         </th>
                         <th pSortableColumn="name">
                             Name <p-sortIcon field="name"></p-sortIcon>
@@ -173,7 +173,7 @@
                 <button
                     pButton
                     pRipple
-                    label="Add category"
+                    label="Submit"
                     icon="pi pi-check"
                     class="p-button-text"
                     (click)="saveProduct()"
