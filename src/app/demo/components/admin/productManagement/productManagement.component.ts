@@ -65,16 +65,15 @@ export class ProductManagement implements OnInit {
         ];
     }
 
-    onUpload(event: any) {
-        for (const file of event.files) {
-            console.log(file);
-            this.uploadedFiles.push(file.name);
-        }
-
+    onBasicUploadAuto(event: any) {
+        console.log(event);
+        const file = event.files[0];
+        console.log(file);
+        this.product.image = file;
         this.messageService.add({
             severity: 'info',
             summary: 'Success',
-            detail: 'File Uploaded',
+            detail: 'File Uploaded with Auto Mode',
         });
     }
     openNew() {
@@ -145,8 +144,10 @@ export class ProductManagement implements OnInit {
                     life: 3000,
                 });
             } else {
-                console.log(this.product);
-                // this.product.image = "121233";
+                console.log('a', this.product);
+                const formData=new FormData();
+                // Object.entries(this.product).forEach(([key,value]))=>
+                this.productService.createProduct(this.product).subscribe()
                 // @ts-ignore
                 this.products.push(this.product);
                 this.messageService.add({
@@ -158,7 +159,6 @@ export class ProductManagement implements OnInit {
             }
 
             this.products = [...this.products];
-            console.log(this.products);
             this.productDialog = false;
             this.product = {};
         }

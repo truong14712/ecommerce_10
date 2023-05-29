@@ -238,21 +238,10 @@
                         >
                     </div>
                 </div>
-                <p-fileUpload
-                    name="image"
-                    accept="image/*"
-                    [(ngModel)]="product.image"
-                    id="image"
-                    [maxFileSize]="1000000"
-                >
-                    <ng-template pTemplate="content">
-                        <ul *ngIf="uploadedFiles.length">
-                            <li *ngFor="let file of uploadedFiles">
-                                {{ file.name }} - {{ file.size }} bytes
-                            </li>
-                        </ul>
-                    </ng-template>
-                </p-fileUpload>
+                <div class="card flex justify-content-center">
+                    <p-toast></p-toast>
+                    <p-fileUpload mode="basic" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"  (onUpload)="onBasicUploadAuto($event)" [auto]="true" chooseLabel="Browse"></p-fileUpload>
+                </div>
             </ng-template>
 
             <ng-template pTemplate="footer">
