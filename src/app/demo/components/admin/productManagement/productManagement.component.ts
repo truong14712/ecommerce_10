@@ -3,6 +3,8 @@ import { Product } from 'src/app/demo/api/product';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ProductService } from 'src/app/demo/service/product.service';
+import { CategoryService } from 'src/app/demo/service/category.service';
+import { Category } from 'src/app/demo/api/category';
 
 @Component({
     templateUrl: './productManagement.component.html',
@@ -17,6 +19,8 @@ export class ProductManagement implements OnInit {
 
     products: Product[] = [];
 
+    categories: Category[] = [];
+
     product: Product = {};
 
     selectedProducts: Product[] = [];
@@ -27,8 +31,11 @@ export class ProductManagement implements OnInit {
 
     rowsPerPageOptions = [5, 10, 20];
 
+    uploadedFiles: any[] = [];
+
     constructor(
         private productService: ProductService,
+        private categoryService: CategoryService,
         private messageService: MessageService
     ) {}
 
@@ -42,6 +49,15 @@ export class ProductManagement implements OnInit {
                 console.log(err);
             }
         );
+        this.categoryService.getAllCategory().subscribe(
+            (res) => {
+                this.categories = res;
+                console.log(res);
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
         this.cols = [
             { field: 'product', header: 'Product' },
             { field: 'price', header: 'Price' },
@@ -49,6 +65,17 @@ export class ProductManagement implements OnInit {
         ];
     }
 
+    onBasicUploadAuto(event: any) {
+        console.log(event);
+        const file = event.files[0];
+        console.log(file);
+        this.product.image = file;
+        this.messageService.add({
+            severity: 'info',
+            summary: 'Success',
+            detail: 'File Uploaded with Auto Mode',
+        });
+    }
     openNew() {
         this.product = {};
         this.submitted = false;
@@ -117,9 +144,10 @@ export class ProductManagement implements OnInit {
                     life: 3000,
                 });
             } else {
-                this.product._id = this.createId();
-                this.product.code = this.createId();
-                this.product.image = 'product-placeholder.svg';
+                console.log('a', this.product);
+                const formData=new FormData();
+                // Object.entries(this.product).forEach(([key,value]))=>
+                this.productService.createProduct(this.product).subscribe()
                 // @ts-ignore
                 this.products.push(this.product);
                 this.messageService.add({

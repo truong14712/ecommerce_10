@@ -28,7 +28,9 @@ export class ProductService {
     }
 
     createProduct(product: Product): Observable<any> {
-        return this.http.post<any>(this.apiUrl, product, this.httpOptions);
+        const url = `${this.apiUrl}/product/add`;
+
+        return this.http.post<any>(url, product, this.httpOptions);
     }
 
     updateProduct(id: string, product: Product): Observable<any> {

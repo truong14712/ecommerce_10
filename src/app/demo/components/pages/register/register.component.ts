@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/demo/service/user.service';
 import { Router } from '@angular/router';
 @Component({
@@ -12,23 +12,38 @@ export class RegisterComponent implements OnInit {
     constructor(
         public layoutService: LayoutService,
         private userService: UserService,
-        private router: Router
+        private router: Router,
+        private fb: FormBuilder
     ) {}
+    submitted: boolean = false;
 
     ngOnInit() {}
     public formData: FormGroup = new FormGroup({
-        name: new FormControl(''),
-        email: new FormControl(''),
-        password: new FormControl(''),
-        confirmPassword: new FormControl(''),
+        name: new FormControl('', [
+            Validators.required,
+            Validators.minLength(6),
+        ]),
+        email: new FormControl('', [
+            Validators.email,
+            Validators.minLength(6),
+            Validators.pattern(
+                '^[a-z][a-z0-9_.]{5,32}@[a-z0-9]{2,}(.[a-z0-9]{2,4}){1,2}$'
+            ),
+        ]),
+        password: new FormControl('', [
+            Validators.required,
+            Validators.minLength(6),
+        ]),
+        confirmPassword: new FormControl('', [
+            Validators.required,
+            Validators.minLength(6),
+        ]),
     });
     valCheck: string[] = ['remember'];
     handleSubmit() {
+        this.submitted = true;
         console.log('submit form: formData = ', this.formData.value);
-        const { name, password, confirmPassword } = this.formData.value;
-        if (name === '' || password === '' || confirmPassword === '') {
-            alert('Không đc để trống');
-        } else {
+        if (this.formData.value.length > 0) {
             this.userService.Signup(this.formData.value).subscribe();
             this.router.navigate(['/login']);
         }

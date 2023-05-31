@@ -5,22 +5,54 @@
                 <form [formGroup]="formData" (ngSubmit)="handleSubmit()">
                     <label for="name" class="block text-900 text-xl font-medium mb-2">Name</label>
                     <input id="name" type="text" placeholder="Name" pInputText class="w-full md:w-30rem mb-5"  style="padding:1rem"
-                    formControlName="name"
+                    formControlName="name" required name="name"
+                    autofocus
+                    [ngClass]="{
+                        'ng-invalid ng-dirty': submitted && !formData.controls['name'].valid
+                    }">
+                    <small
+                        class="ng-dirty ng-invalid"
+                        *ngIf="submitted &&  !formData.controls['name'].valid"
+                        >Name is required.</small
                     >
                     <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-                    <input id="email1" type="text" placeholder="Email address" pInputText class="w-full md:w-30rem mb-5"  style="padding:1rem"
-                    formControlName="email"
+                    <input id="email1" type="text" placeholder="Email address" pInputText class="w-full md:w-30rem mb-2"  style="padding:1rem"
+                    formControlName="email" required
+                    [ngClass]="{
+                        'ng-invalid ng-dirty': submitted && !formData.controls['name'].valid
+                    }">
+                    <small
+                        class="ng-dirty ng-invalid"
+                        *ngIf="submitted &&  !formData.controls['email'].valid"
+                        >Email is required.</small
                     >
                     <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
                     <p-password id="password1"
                     placeholder="Password" [toggleMask]="true"
                     formControlName="password"
-                    styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
-                    <label for="confirmPassword" class="block text-900 font-medium text-xl mb-2">Confirm Password</label>
+                    [ngClass]="{
+                        'ng-invalid ng-dirty': submitted && !formData.controls['name'].valid
+                    }"
+                    styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem" required></p-password>
+                    <small
+                    class="ng-dirty ng-invalid"
+                    *ngIf="submitted &&  !formData.controls['password'].valid"
+                    >Password is required.</small
+                >
+                    <label for="confirmPassword" class="block text-900 font-medium text-xl mb-2" >Confirm Password</label>
                     <p-password id="confirmPassword"
                     placeholder="Password" [toggleMask]="true"
                     formControlName="confirmPassword"
-                    styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+                    styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"
+                    [ngClass]="{
+                        'ng-invalid ng-dirty': submitted && !formData.controls['name'].valid
+                    }"
+                    required></p-password>
+                    <small
+                    class="ng-dirty ng-invalid"
+                    *ngIf="submitted &&  !formData.controls['confirmPassword'].valid"
+                    >ConfirmPassword is required.</small
+                >
                     <div class="flex align-items-center justify-content-between mb-5 gap-5">
                         <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)
                         "routerLink="/login"
