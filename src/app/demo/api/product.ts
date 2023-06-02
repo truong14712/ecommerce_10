@@ -10,7 +10,12 @@ export interface Product {
     price?: number;
     quantity?: number;
     inventoryStatus?: InventoryStatus;
-    categoryId?: string;
+    categoryId?: {
+        _id:string;
+        name:string;
+        __v?:number;
+    };
     image?: string;
     rating?: number;
+    __v?:number;
 }

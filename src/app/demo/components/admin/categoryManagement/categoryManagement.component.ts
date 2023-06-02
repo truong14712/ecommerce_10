@@ -116,7 +116,6 @@ export class CategoryManagement implements OnInit {
                 // @ts-ignore
                 this.products[this.findIndexById(this.product._id)] =
                     this.product;
-                console.log(this.product);
                 this.categoryService
                     .updateCategory(this.product)
                     .subscribe((res) => {

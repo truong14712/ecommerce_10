@@ -5,7 +5,7 @@ import { Table } from 'primeng/table';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { CategoryService } from 'src/app/demo/service/category.service';
 import { Category } from 'src/app/demo/api/category';
-
+import { Toast } from 'primeng/toast';
 @Component({
     templateUrl: './productManagement.component.html',
     providers: [MessageService],
@@ -21,7 +21,7 @@ export class ProductManagement implements OnInit {
 
     categories: Category[] = [];
 
-    product: Product = {};
+    product: any = {};
 
     selectedProducts: Product[] = [];
 
@@ -88,6 +88,7 @@ export class ProductManagement implements OnInit {
 
     editProduct(product: Product) {
         this.product = { ...product };
+        console.log(this.product)
         this.productDialog = true;
     }
 
@@ -115,12 +116,24 @@ export class ProductManagement implements OnInit {
         this.products = this.products.filter(
             (val) => val._id !== this.product._id
         );
-        this.messageService.add({
-            severity: 'success',
-            summary: 'Successful',
-            detail: 'Product Deleted',
-            life: 3000,
-        });
+        this.productService.deleteProduct(this.product._id).subscribe(
+            (res) => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Successful',
+                    detail: 'Xóa sản phẩm thành công ',
+                    life: 3000,
+                });
+            },
+            (err) => {
+                this.messageService.add({
+                    life: 3000,
+                    severity: 'error',
+                    summary: 'Error',
+                    detail: `${err.message}`,
+                });
+            }
+        );
         this.product = {};
     }
 
@@ -137,6 +150,10 @@ export class ProductManagement implements OnInit {
                 // @ts-ignore
                 this.products[this.findIndexById(this.product._id)] =
                     this.product;
+                this.productService
+                .updateProduct(this.product)
+                .subscribe((res) => {
+                });
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -144,18 +161,26 @@ export class ProductManagement implements OnInit {
                     life: 3000,
                 });
             } else {
-                console.log('a', this.product);
-                const formData=new FormData();
-                // Object.entries(this.product).forEach(([key,value]))=>
-                this.productService.createProduct(this.product).subscribe()
+                this.productService.createProduct(this.product).subscribe(
+                    (res) => {
+                        this.products.push(res.data);
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Successful',
+                            detail: 'Product Created',
+                            life: 3000,
+                        });
+                    },
+                    (err) => {
+                        this.messageService.add({
+                            life: 3000,
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: `${err.message}`,
+                        });
+                    }
+                );
                 // @ts-ignore
-                this.products.push(this.product);
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Product Created',
-                    life: 3000,
-                });
             }
 
             this.products = [...this.products];

@@ -33,13 +33,15 @@ export class ProductService {
         return this.http.post<any>(url, product, this.httpOptions);
     }
 
-    updateProduct(id: string, product: Product): Observable<any> {
-        const url = `${this.apiUrl}/${id}`;
-        return this.http.put<any>(url, product, this.httpOptions);
+    updateProduct(product: Product): Observable<any> {
+        const url = `${this.apiUrl}/product/update/${product._id}`;
+        const {_id,__v,...newData}=product
+        console.log('newData',newData)
+        return this.http.put<any>(url,newData, this.httpOptions);
     }
 
-    deleteProduct(id: string): Observable<any> {
-        const url = `${this.apiUrl}/${id}`;
+    deleteProduct(id: string | undefined): Observable<any> {
+        const url = `${this.apiUrl}/product/delete/${id}`;
         return this.http.delete<any>(url);
     }
 }

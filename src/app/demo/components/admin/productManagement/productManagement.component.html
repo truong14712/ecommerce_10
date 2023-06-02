@@ -205,12 +205,12 @@
                         <div
                             class="field-radiobutton col-6"
                             *ngFor="let item of categories"
-                        >
+                        >   
                             <p-radioButton
                                 id="category2"
                                 name="category"
                                 value="{{ item._id }}"
-                                [(ngModel)]="product.categoryId"
+                                [(ngModel)]="product.categoryId._id"
                             ></p-radioButton>
                             <label for="category2">{{ item.name }}</label>
                         </div>
@@ -238,9 +238,11 @@
                         >
                     </div>
                 </div>
-                <div class="card flex justify-content-center">
-                    <p-toast></p-toast>
-                    <p-fileUpload mode="basic" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"  (onUpload)="onBasicUploadAuto($event)" [auto]="true" chooseLabel="Browse"></p-fileUpload>
+                <div class="">
+                    <label for="image">Image</label>
+
+                    <input className="mt-2" name="image" type="text" pInputText [(ngModel)]="product.image" />
+                   
                 </div>
             </ng-template>
 
