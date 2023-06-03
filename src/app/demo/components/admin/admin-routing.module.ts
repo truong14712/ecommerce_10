@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductManagement } from './productManagement/productManagement.component';
 import { CategoryManagement } from './categoryManagement/categoryManagement.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
     imports: [
@@ -10,6 +11,7 @@ import { CategoryManagement } from './categoryManagement/categoryManagement.comp
             { path: 'dashboard', component: DashboardComponent },
             { path: 'products', component: ProductManagement },
             { path: 'categories', component: CategoryManagement },
+            { path: 'profile', component: ProfileComponent },
         ]),
     ],
     exports: [RouterModule],
