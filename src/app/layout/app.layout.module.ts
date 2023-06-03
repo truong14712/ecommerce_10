@@ -18,6 +18,7 @@ import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AdminLayoutComponent } from "./app.layout.component";
 import { UserLayoutComponent } from './user-layout/user-layout.component';
+import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { UserLayoutComponent } from './user-layout/user-layout.component';
         UserLayoutComponent,
     ],
     imports: [
+		MenubarModule,
         BrowserModule,
         FormsModule,
         HttpClientModule,
