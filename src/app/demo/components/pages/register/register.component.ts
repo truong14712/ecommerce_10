@@ -21,7 +21,12 @@ export class RegisterComponent implements OnInit {
     ) {}
     submitted: boolean = false;
 
-    ngOnInit() {}
+    ngOnInit() {
+        const user = localStorage.getItem('user');
+        if (user) {
+            this.router.navigate(['/']);
+        }
+    }
     public formData: FormGroup = new FormGroup({
         name: new FormControl('', [
             Validators.required,

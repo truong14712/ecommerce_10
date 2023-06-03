@@ -17,7 +17,12 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private messageService: MessageService
     ) {}
-    ngOnInit() {}
+    ngOnInit() {
+        const user = localStorage.getItem('user');
+        if (user) {
+            this.router.navigate(['/']);
+        }
+    }
     public formData: FormGroup = new FormGroup({
         email: new FormControl('', Validators.required),
         password: new FormControl('', Validators.min(6)),
@@ -34,6 +39,10 @@ export class LoginComponent implements OnInit {
             (res) => {
                 const { user } = res;
                 console.log(user);
+                localStorage.setItem(
+                    'isAdmin',
+                    JSON.stringify(user.role === 'admin')
+                );
                 if (user.role === 'admin') {
                     this.router.navigate(['admin/dashboard']);
                 } else {

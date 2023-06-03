@@ -21,6 +21,7 @@ export class UserLayoutComponent implements OnInit {
     Logout() {
         if (this.user) {
             localStorage.removeItem('user');
+            localStorage.removeItem('isAdmin');
             this.Router.navigate(['/login']);
         }
     }

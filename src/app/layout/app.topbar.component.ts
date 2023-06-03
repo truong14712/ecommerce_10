@@ -20,6 +20,7 @@ export class AppTopBarComponent implements OnInit {
     ngOnInit() {}
     Logout() {
         localStorage.removeItem('user');
+        localStorage.removeItem('isAdmin');
         this.Router.navigate(['/login']);
     }
 }
