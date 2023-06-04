@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 import { UserService } from 'src/app/demo/service/user.service';
 import { Router } from '@angular/router';
 @Component({
@@ -12,12 +17,16 @@ export class RegisterComponent implements OnInit {
     constructor(
         public layoutService: LayoutService,
         private userService: UserService,
-        private router: Router,
-        private fb: FormBuilder
+        private router: Router
     ) {}
     submitted: boolean = false;
 
-    ngOnInit() {}
+    ngOnInit() {
+        const user = localStorage.getItem('user');
+        if (user) {
+            this.router.navigate(['/']);
+        }
+    }
     public formData: FormGroup = new FormGroup({
         name: new FormControl('', [
             Validators.required,
@@ -43,9 +52,14 @@ export class RegisterComponent implements OnInit {
     handleSubmit() {
         this.submitted = true;
         console.log('submit form: formData = ', this.formData.value);
-        if (this.formData.value.length > 0) {
-            this.userService.Signup(this.formData.value).subscribe();
-            this.router.navigate(['/login']);
-        }
+        this.userService.Signup(this.formData.value).subscribe(
+            (res) => {
+                this.router.navigate(['/login']);
+            },
+            (err) => {
+                const { error } = err;
+                alert(error.message);
+            }
+        );
     }
 }

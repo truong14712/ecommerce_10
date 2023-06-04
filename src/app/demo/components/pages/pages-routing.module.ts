@@ -33,6 +33,13 @@ import { RouterModule } from '@angular/router';
                 loadChildren: () =>
                     import('./cart/cart.module').then((m) => m.CartModule),
             },
+            {
+                path: 'profile',
+                loadChildren: () =>
+                    import('./profile/profile.module').then(
+                        (m) => m.ProfileModule
+                    ),
+            },
             // { path: '**', redirectTo: '/notfound' }
         ]),
     ],

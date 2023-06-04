@@ -19,7 +19,7 @@
                     <input id="email1" type="text" placeholder="Email address" pInputText class="w-full md:w-30rem mb-2"  style="padding:1rem"
                     formControlName="email" required
                     [ngClass]="{
-                        'ng-invalid ng-dirty': submitted && !formData.controls['name'].valid
+                        'ng-invalid ng-dirty': submitted && !formData.controls['email'].valid
                     }">
                     <small
                         class="ng-dirty ng-invalid"
@@ -31,7 +31,7 @@
                     placeholder="Password" [toggleMask]="true"
                     formControlName="password"
                     [ngClass]="{
-                        'ng-invalid ng-dirty': submitted && !formData.controls['name'].valid
+                        'ng-invalid ng-dirty': submitted && !formData.controls['password'].valid
                     }"
                     styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem" required></p-password>
                     <small

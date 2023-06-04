@@ -3,13 +3,14 @@ import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AdminLayoutComponent } from './layout/app.layout.component';
 import { UserLayoutComponent } from './layout/user-layout/user-layout.component';
+import { AdminGuard } from './demo/components/AdminGuard/AdminGuard.component';
 @NgModule({
     imports: [
         RouterModule.forRoot(
             [
                 {
                     path: '',
-                    component:UserLayoutComponent,
+                    component: UserLayoutComponent,
                     loadChildren: () =>
                         import('./demo/components/pages/pages.module').then(
                             (m) => m.PagesModule
@@ -27,6 +28,7 @@ import { UserLayoutComponent } from './layout/user-layout/user-layout.component'
                                 ).then((m) => m.DashboardModule),
                         },
                     ],
+                    canActivate: [AdminGuard],
                 },
                 {
                     path: 'auth',
@@ -35,7 +37,7 @@ import { UserLayoutComponent } from './layout/user-layout/user-layout.component'
                             (m) => m.AuthModule
                         ),
                 },
-                { path: '**', component: NotfoundComponent }
+                { path: '**', component: NotfoundComponent },
             ],
             {
                 scrollPositionRestoration: 'enabled',
