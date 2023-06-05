@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-profile',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-    constructor() {}
+    constructor(private router: Router) {}
     getUser: any = {};
     user: any;
     ngOnInit() {
@@ -14,6 +15,8 @@ export class ProfileComponent implements OnInit {
         if (this.getUser) {
             this.user = JSON.parse(this.getUser);
             console.log(this.user);
+        } else {
+            this.router.navigate(['/']);
         }
     }
 }
