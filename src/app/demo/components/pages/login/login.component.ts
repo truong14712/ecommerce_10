@@ -37,18 +37,17 @@ export class LoginComponent implements OnInit {
         console.log('submit form: formData = ', this.formData.value);
         this.userService.Signin(this.formData.value).subscribe(
             (res) => {
-                const { user } = res;
-                console.log(user);
-                localStorage.setItem(
-                    'isAdmin',
-                    JSON.stringify(user.role === 'admin')
-                );
-                if (user.role === 'admin') {
+                // const { user } = res;
+                // localStorage.setItem(
+                //     'isAdmin',
+                //     JSON.stringify(user.role === 'admin')
+                // );
+                if (res.isAdmin) {
                     this.router.navigate(['admin/dashboard']);
                 } else {
                     this.router.navigate(['/']);
                 }
-                localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('user', JSON.stringify(res));
             },
             (err) => {
                 // this.messageService.add({

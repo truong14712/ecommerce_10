@@ -6,7 +6,8 @@ import { CanActivate, Router } from '@angular/router';
 export class AdminGuard implements CanActivate {
     constructor(private router: Router) {}
     canActivate(): boolean {
-        const isAdmin = localStorage.getItem('isAdmin') === 'true';
+            
+        // const isAdmin = localStorage.getItem('isAdmin') === 'true';
         if (isAdmin) {
             return true;
         } else {
