@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { Category } from '../api/category';
 
-
 @Injectable({
     providedIn: 'root',
 })
@@ -27,6 +26,11 @@ export class CartService {
     updateCart(cart:any): Observable<any> {
         const url = `${this.apiUrl}/update`;
         return this.http.post<any>(url,cart);
+
+    }
+    updateProductInCart(cart:any): Observable<any> {
+        const url = `${this.apiUrl}/updateCart`;
+        return this.http.patch<any>(url,cart);
 
     }
 

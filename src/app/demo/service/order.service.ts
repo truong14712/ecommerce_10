@@ -21,7 +21,9 @@ export class OrdersService {
     createOrder(cart:any): Observable<any> {
         return this.http.post<any>(this.apiUrl,cart);
     }
-
+    updateOrderStatus(order:any): Observable<any> {
+        return this.http.patch<any>(this.apiUrl+`/updateStatus`,order);
+    }
     updateCart(cart:any): Observable<any> {
         const url = `${this.apiUrl}/update`;
         return this.http.post<any>(url,cart);

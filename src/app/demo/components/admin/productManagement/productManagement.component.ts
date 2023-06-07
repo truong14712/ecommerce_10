@@ -17,7 +17,7 @@ export class ProductManagement implements OnInit {
 
     deleteProductsDialog: boolean = false;
 
-    products: Product[] = [];
+    products: any[] = [];
 
     categories: Category[] = [];
 
@@ -33,6 +33,7 @@ export class ProductManagement implements OnInit {
 
     uploadedFiles: any[] = [];
 
+     quantity: number = 1;
     constructor(
         private productService: ProductService,
         private categoryService: CategoryService,
@@ -217,4 +218,5 @@ export class ProductManagement implements OnInit {
             'contains'
         );
     }
+    
 }

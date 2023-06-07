@@ -11,12 +11,16 @@ import { EventService } from './demo/service/event.service';
 import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './token-interceptor';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
-    declarations: [AppComponent, NotfoundComponent],
-    imports: [AppRoutingModule, AppLayoutModule],
+    declarations: [AppComponent, NotfoundComponent,],
+    imports: [AppRoutingModule, AppLayoutModule,HttpClientModule,ToastModule],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
         CountryService,
         CustomerService,
         EventService,
@@ -24,6 +28,7 @@ import { PhotoService } from './demo/service/photo.service';
         NodeService,
         PhotoService,
         ProductService,
+        
     ],
     bootstrap: [AppComponent],
 })

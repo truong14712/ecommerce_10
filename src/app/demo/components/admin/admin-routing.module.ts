@@ -5,6 +5,7 @@ import { ProductManagement } from './productManagement/productManagement.compone
 import { CategoryManagement } from './categoryManagement/categoryManagement.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminGuard } from '../AdminGuard/AdminGuard.component';
+import { OrdersComponent } from './orders/orders.component';
 @NgModule({
     imports: [
         RouterModule.forChild([
@@ -28,7 +29,12 @@ import { AdminGuard } from '../AdminGuard/AdminGuard.component';
                 component: ProfileComponent,
                 canActivate: [AdminGuard],
             },
-            { path: '', redirectTo: '/', pathMatch: 'full' },
+            { path: 'orders',
+             component: OrdersComponent,
+             canActivate: [AdminGuard] 
+            },
+            // { path: '', redirectTo: '/', pathMatch: 'full' },
+
         ]),
     ],
     exports: [RouterModule],

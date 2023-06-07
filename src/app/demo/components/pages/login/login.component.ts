@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
 
     handleSubmit() {
         this.submitted = true;
-        console.log('submit form: formData = ', this.formData.value);
         this.userService.Signin(this.formData.value).subscribe(
             (res) => {
                 // const { user } = res;
@@ -46,17 +45,18 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['admin/dashboard']);
                 } else {
                     this.router.navigate(['/']);
+                    // location.reload()
                 }
                 localStorage.setItem('user', JSON.stringify(res));
             },
             (err) => {
-                // this.messageService.add({
-                //     severity: 'error',
-                //     summary: 'Error',
-                //     detail: err.message,
-                // });
                 const { error } = err;
-                alert(error.message);
+                this.messageService.add({
+                    severity: 'error',
+                    summary: 'Error',
+                    detail: error.message,
+                });
+                alert(error.message)
             }
         );
     }

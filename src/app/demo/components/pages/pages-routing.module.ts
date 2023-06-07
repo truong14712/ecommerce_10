@@ -17,6 +17,18 @@ import { RouterModule } from '@angular/router';
                     ),
             },
             {
+                path: 'orderHistory',
+                loadChildren: () =>
+                    import('./OrderHistory/OrderHistory.module').then(
+                        (m) => m.OrderHistoryModule
+                    ),
+            },
+            {
+                path: 'checkout',
+                loadChildren: () =>
+                    import('./checkout/checkout.module').then((m) => m.CheckoutModule),
+            },
+            {
                 path: 'login',
                 loadChildren: () =>
                     import('./login/login.module').then((m) => m.LoginModule),

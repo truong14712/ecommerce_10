@@ -71,7 +71,7 @@ export class CheckoutComponent implements OnInit {
           ...this.checkoutForm.value
         }).subscribe(
             (res)=>{
-                // this.router.navigate(["checkout",this.cartId])
+                this.router.navigate(["orderHistory"])
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -81,4 +81,6 @@ export class CheckoutComponent implements OnInit {
             }
         )
     }
+
+    
 }

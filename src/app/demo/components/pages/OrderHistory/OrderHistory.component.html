@@ -1,6 +1,11 @@
 <main class="p-5">  
-
-   <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+  
+  <div *ngIf="products.length===0">
+    <h2 class="">
+      Bạn chưa có đơn hàng nào
+    </h2>
+  </div>
+   <p-table *ngIf="products.length>0" able [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
      <ng-template pTemplate="caption">
        <h2 class="flex align-items-center justify-content-between">
          Đặt hàng
@@ -32,7 +37,7 @@
             <td class="text-center">${{ item.totalPriceItem }}</td>
             <!-- <td class="text-center">${{ product.totalPriceItem }}</td> -->
             <td>{{ product.payment === 1 ? 'Thanh toán khi nhận hàng' : 'Thanh toán online' }}</td>
-            <td>{{ order_status[+product.status] }}</td>
+            <td>{{ order_status[+item.status] }}</td>
           </tr>
         </ng-container>
            

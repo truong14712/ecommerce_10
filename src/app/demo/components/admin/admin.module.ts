@@ -21,10 +21,13 @@ import { DialogModule } from 'primeng/dialog';
 //import component
 import { DashboardComponent } from '../admin/dashboard/dashboard.component';
 import { ProductManagement } from './productManagement/productManagement.component';
-
+import { OrdersComponent } from './orders/orders.component';
 //để nguyên
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DashboardsRoutingModule } from './admin-routing.module';
 import { CategoryManagement } from './categoryManagement/categoryManagement.component';
+import { TreeSelectModule } from 'primeng/treeselect';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
     imports: [
         CommonModule,
@@ -50,7 +53,10 @@ import { CategoryManagement } from './categoryManagement/categoryManagement.comp
         RadioButtonModule,
         InputNumberModule,
         DialogModule,
+        ConfirmDialogModule,
+        TreeSelectModule,
+        ReactiveFormsModule
     ],
-    declarations: [DashboardComponent, ProductManagement,CategoryManagement],
+    declarations: [DashboardComponent, ProductManagement,CategoryManagement,OrdersComponent],
 })
 export class DashboardModule {}

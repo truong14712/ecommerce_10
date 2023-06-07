@@ -23,25 +23,25 @@ export class ProductService {
         return this.http.get(url, this.httpOptions);
     }
     getDetail(id: string): Observable<any> {
-        const url = `${this.apiUrl}/product/${id}`;
+        const url = `${this.apiUrl}/products/find/${id}`;
         return this.http.get<any>(url, this.httpOptions);
     }
 
     createProduct(product: Product): Observable<any> {
-        const url = `${this.apiUrl}/product/add`;
+        const url = `${this.apiUrl}/products`;
 
         return this.http.post<any>(url, product, this.httpOptions);
     }
 
     updateProduct(product: Product): Observable<any> {
-        const url = `${this.apiUrl}/product/update/${product._id}`;
+        const url = `${this.apiUrl}/products/${product._id}`;
         const {_id,__v,...newData}=product
         console.log('newData',newData)
         return this.http.put<any>(url,newData, this.httpOptions);
     }
 
     deleteProduct(id: string | undefined): Observable<any> {
-        const url = `${this.apiUrl}/product/delete/${id}`;
+        const url = `${this.apiUrl}/products/${id}`;
         return this.http.delete<any>(url);
     }
 }

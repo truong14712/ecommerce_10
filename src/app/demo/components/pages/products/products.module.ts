@@ -10,9 +10,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { RatingModule } from 'primeng/rating';
 import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     imports: [
+        ToastModule,
         CommonModule,
         ProductsRoutingModule,
         FormsModule,

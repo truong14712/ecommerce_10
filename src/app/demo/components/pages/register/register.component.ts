@@ -51,7 +51,6 @@ export class RegisterComponent implements OnInit {
     valCheck: string[] = ['remember'];
     handleSubmit() {
         this.submitted = true;
-        console.log('submit form: formData = ', this.formData.value);
         this.userService.Signup(this.formData.value).subscribe(
             (res) => {
                 this.router.navigate(['/login']);

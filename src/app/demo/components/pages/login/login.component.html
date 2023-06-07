@@ -9,11 +9,7 @@
                     [ngClass]="{
                         'ng-invalid ng-dirty': submitted && !formData.controls['email'].valid
                     }">
-                    <small
-                    class="ng-dirty ng-invalid"
-                    *ngIf="submitted &&  !formData.controls['email'].valid"
-                    >Email is required.</small
-                >
+                   
                     <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
                     <p-password id="password1"
                     placeholder="Password" [toggleMask]="true"

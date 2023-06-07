@@ -131,6 +131,7 @@ export class CategoryManagement implements OnInit {
                 this.categoryService
                     .createCategory(this.product)
                     .subscribe((res) => {
+                        console.log(res)
                         this.product = res.data;
                     });
                 this.categoryService.getAllCategory().subscribe((res) => {
