@@ -33,7 +33,8 @@ export class ProductManagement implements OnInit {
 
     uploadedFiles: any[] = [];
 
-     quantity: number = 1;
+    quantity: number = 1;
+    isEditProduct:boolean=false;
     constructor(
         private productService: ProductService,
         private categoryService: CategoryService,
@@ -90,7 +91,7 @@ export class ProductManagement implements OnInit {
 
     editProduct(product: Product) {
         this.product = { ...product };
-        console.log(this.product)
+        this.isEditProduct=true
         this.productDialog = true;
     }
 
@@ -142,6 +143,7 @@ export class ProductManagement implements OnInit {
     hideDialog() {
         this.productDialog = false;
         this.submitted = false;
+        this.isEditProduct=true
     }
 
     saveProduct() {
