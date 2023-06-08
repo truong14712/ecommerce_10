@@ -143,7 +143,7 @@ export class ProductManagement implements OnInit {
     hideDialog() {
         this.productDialog = false;
         this.submitted = false;
-        this.isEditProduct=true
+        this.isEditProduct=false
     }
 
     saveProduct() {
@@ -191,6 +191,7 @@ export class ProductManagement implements OnInit {
             this.products = [...this.products];
             this.productDialog = false;
             this.product = {};
+            this.isEditProduct=false
         }
     }
 
