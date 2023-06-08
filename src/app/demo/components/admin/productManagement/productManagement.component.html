@@ -121,6 +121,7 @@
                                 [alt]="product.name"
                                 width="100"
                                 class="shadow-4"
+                                style="width: 170px;"
                             />
                         </td>
                         <td style="width: 14%; min-width: 8rem">
@@ -205,13 +206,16 @@
                         <div
                             class="field-radiobutton col-6"
                             *ngFor="let item of categories"
-                        >   
+                        >
                             <p-radioButton
                                 id="category2"
                                 name="category"
                                 value="{{ item._id }}"
-                                [(ngModel)]="isEditProduct ? product.categoryId._id : product.categoryId"
-                                
+                                [(ngModel)]="
+                                    isEditProduct
+                                        ? product.categoryId._id
+                                        : product.categoryId
+                                "
                             ></p-radioButton>
                             <label for="category2">{{ item.name }}</label>
                         </div>
@@ -242,8 +246,13 @@
                 <div class="">
                     <label for="image">Image</label>
 
-                    <input className="mt-2" name="image" type="text" pInputText [(ngModel)]="product.image" />
-                   
+                    <input
+                        className="mt-2"
+                        name="image"
+                        type="text"
+                        pInputText
+                        [(ngModel)]="product.image"
+                    />
                 </div>
             </ng-template>
 

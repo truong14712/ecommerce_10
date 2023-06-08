@@ -29,8 +29,7 @@
 							</div>
 							<div class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
 								<span class="text-2xl font-semibold mb-2 align-self-center md:align-self-end">${{product.price}}</span>
-								<p-button icon="pi pi-shopping-cart" label="Add to Cart" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'" styleClass="mb-2 p-button-sm"></p-button>
-								<span [class]="'product-badge'">{{product.inventoryStatus}}</span>
+								<p-button icon="pi pi-shopping-cart" label="Add to Cart" (onClick)="addToCart(product._id)" styleClass="mb-2 p-button-sm"></p-button>
 							</div>
 						</div>
 					</div>
@@ -47,7 +46,7 @@
 								<span [class]="'product-badge status-' ">{{product.inventoryStatus}}</span>
 							</div>
 							<div class="flex flex-column align-items-center text-center mb-3">
-								<img [src]="product.image" [alt]="product.name" class="w-4 shadow-2 my-3 mx-0 product_image"/>
+								<img [src]="product.image" [alt]="product.name" class="w-full shadow-2 my-3 mx-0 product_image"/>
 								<div class="text-2xl font-bold h-40 product_title">{{product.name}}</div>
 								<div class="mb-3 p-5 product-desc">{{product.description}}</div>
 								<!-- <p-rating [ngModel]="product.rating.rate" [readonly]="true" [cancel]="false"></p-rating> -->
@@ -57,7 +56,9 @@
                                 <button pButton pRipple type="button" label="View Details" class="p-button-info"
                                 (click)="navigateToDetail(product._id)"
                                 ></button>
-								<p-button icon="pi pi-shopping-cart" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></p-button>
+								<p-button icon="pi pi-shopping-cart"
+                                (onClick)="addToCart(product._id)"
+                                ></p-button>
 							</div>
 						</div>
 					</div>
