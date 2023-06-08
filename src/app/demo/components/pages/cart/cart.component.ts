@@ -27,14 +27,17 @@ export class CartComponent implements OnInit {
         } else {
             this.cartService.getCartById(getUser._id).subscribe(
                 (res) => {
-                    this.cartId = res?.cart._id;
+                    if(res?.cart.length==0){
+                        this.products=res.cart
+                        return;
+                    }
+                    this.cartId = res?.cart?._id;
                     const convertedArr = res?.cart?.products.map(
                         (item: any) => ({
                             ...item.productId, // Lấy thông tin chi tiết của sản phẩm từ productId
                             quantity: item.quantity, // Thêm thuộc tính quantity vào đối tượng
                         })
                     );
-                    console.log(convertedArr);
                     for (const item of convertedArr) {
                         this.totalCart += item.price * item.quantity;
                     }

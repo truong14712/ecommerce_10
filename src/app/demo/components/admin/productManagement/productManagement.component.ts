@@ -39,8 +39,7 @@ export class ProductManagement implements OnInit {
         private categoryService: CategoryService,
         private messageService: MessageService
     ) {}
-
-    ngOnInit() {
+    getAllProduct(){
         this.productService.getAllProduct().subscribe(
             (res) => {
                 this.products = res;
@@ -50,10 +49,12 @@ export class ProductManagement implements OnInit {
                 console.log(err);
             }
         );
+    }
+    ngOnInit() {
+        this.getAllProduct()
         this.categoryService.getAllCategory().subscribe(
             (res) => {
-                this.categories = res;
-                console.log(res);
+                this.categories = res.data;
             },
             (err) => {
                 console.log(err);
@@ -154,6 +155,7 @@ export class ProductManagement implements OnInit {
                 this.productService
                 .updateProduct(this.product)
                 .subscribe((res) => {
+                    this.getAllProduct()
                 });
                 this.messageService.add({
                     severity: 'success',
@@ -164,7 +166,7 @@ export class ProductManagement implements OnInit {
             } else {
                 this.productService.createProduct(this.product).subscribe(
                     (res) => {
-                        this.products.push(res.data);
+                        this.getAllProduct()
                         this.messageService.add({
                             severity: 'success',
                             summary: 'Successful',
