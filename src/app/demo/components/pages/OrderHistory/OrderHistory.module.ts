@@ -6,6 +6,7 @@ import { RatingModule } from 'primeng/rating';
 import { ButtonModule } from 'primeng/button';
 import { OrderHistoryComponent } from './OrderHistory.component';
 import { OrderHistoryRoutingModule } from './OrderHistory-routing.module';
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
     imports: [
         CommonModule,
@@ -14,6 +15,7 @@ import { OrderHistoryRoutingModule } from './OrderHistory-routing.module';
         TableModule,
         RatingModule,
         ButtonModule,
+        DialogModule
     ],
     declarations: [OrderHistoryComponent],
 })

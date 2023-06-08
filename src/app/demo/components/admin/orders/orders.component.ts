@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/demo/service/cart.service';
 import { OrdersService } from 'src/app/demo/service/order.service';
 import { Router } from '@angular/router';
-import { MessageService,ConfirmationService,ConfirmEventType} from 'primeng/api';
+import {
+    MessageService,
+    ConfirmationService,
+    ConfirmEventType,
+} from 'primeng/api';
 import { order_status } from 'src/app/utils/orderStatus';
 import { TreeNode } from 'primeng/api';
 import { NodeService } from 'src/app/demo/service/node.service';
@@ -13,10 +17,10 @@ import { payment_method } from '../../../../utils/payment_method';
     selector: 'app-orders',
     templateUrl: './orders.component.html',
     styleUrls: ['./orders.component.scss'],
-    providers: [MessageService,ConfirmationService],
+    providers: [MessageService, ConfirmationService],
 })
 export class OrdersComponent implements OnInit {
-    nodes:any;
+    nodes: any;
     constructor(
         private cartService: CartService,
         private ordersService: OrdersService,
@@ -24,42 +28,36 @@ export class OrdersComponent implements OnInit {
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
         private nodeService: NodeService
-    ) {
-       
-    }
+    ) {}
     orders: any[] = [];
     products: any[] = [];
     // total: number = 0;
     cartId: any;
     submitted: boolean = false;
     order_status: any = order_status;
-    visible: boolean=false;
-    statusDetail: boolean=false;
-    selectedStatus:number=3;
-    orderId:string|null=null;
-    productId:string|null=null;
-    setStatus:any;
+    visible: boolean = false;
+    statusDetail: boolean = false;
+    selectedStatus: number = 3;
+    orderId: string | null = null;
+    productId: string | null = null;
+    setStatus: any;
     statusControl: any;
-    productDetailId:any;
-    orderIdDetail:any;
-payment_method:any=payment_method
-    public formGroup:any;
-    showDialog(orderId:string,productId:string,status:any) {
-        this.orderId=orderId;
-        this.productId=productId
+    productDetailId: any;
+    orderIdDetail: any;
+    payment_method: any = payment_method;
+    public formGroup: any;
+    showDialog(orderId: string, status: any) {
+        this.orderId = orderId;
         this.visible = true;
         this.statusControl.setValue(status);
     }
-    showDetail(orderId:string,productId:string) {
+    showDetail(orderId: string) {
         this.statusDetail = true;
-        this.productDetailId=productId
-        this.orderIdDetail=orderId
-        
-
+        this.orderIdDetail = orderId;
     }
-  
+
     ngOnInit() {
-        this.formGroup= new FormGroup({
+        this.formGroup = new FormGroup({
             status: new FormControl(1),
         });
         this.statusControl = this.formGroup.get('status');
@@ -68,37 +66,41 @@ payment_method:any=payment_method
         if (!getUser) {
             this.router.navigate(['/login']);
         }
-        this.getAllOrder()
+        this.getAllOrder();
     }
-    updateStatusOrder(){
-        const {status}=this.formGroup.value
-        this.ordersService.updateOrderStatus({
-            orderId:this.orderId,
-            productId:this.productId,
-            status
-        }).subscribe((res)=>{
-            this.getAllOrder()
-        })
+    updateStatusOrder() {
+        const { status } = this.formGroup.value;
+        this.ordersService
+            .updateOrderStatus({
+                orderId: this.orderId,
+                status,
+            })
+            .subscribe((res) => {
+                this.getAllOrder();
+            });
         this.visible = false;
     }
-    getAllOrder(){
+    getAllOrder() {
         this.ordersService.getAllOrders().subscribe((res) => {
+            let totalOrderPrice = 0;
+
             const convertedArr = res.map((item: any) => {
                 const products = item.products.map((product: any) => {
                     const totalPriceItem = product.quantity * product.price;
+                    totalOrderPrice += totalPriceItem;
                     return { ...product, totalPriceItem };
                 });
                 return {
                     ...item,
                     products,
+                    totalOrderPrice,
                     createdAt: new Date(item.createdAt).toLocaleDateString(
                         'vi-VI'
                     ),
                 };
             });
-            console.log(convertedArr)
+            console.log(convertedArr);
             this.products = convertedArr;
         });
     }
-  
 }

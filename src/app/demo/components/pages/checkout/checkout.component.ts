@@ -5,13 +5,18 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdersService } from 'src/app/demo/service/order.service';
 import { MessageService } from 'primeng/api';
-
+import * as shortid from 'shortid';
+import capitalizeString from 'src/app/utils/capitalizeString';
 @Component({
     selector: 'app-checkout',
     templateUrl: './checkout.component.html',
     styleUrls: ['./checkout.component.scss'],
     providers: [MessageService],
 })
+
+// Thiết lập các ký tự cho phép trong mã ngẫu nhiên của shortid
+
+
 export class CheckoutComponent implements OnInit {
     constructor(
         private cartService: CartService,
@@ -23,6 +28,7 @@ export class CheckoutComponent implements OnInit {
     totalCart: number = 0;
     cartId: any;
     submitted: boolean = false;
+    shortId:any=capitalizeString(shortid.generate())
     public checkoutForm: FormGroup = new FormGroup({
         name: new FormControl(null, Validators.required),
         phoneNumber: new FormControl('', Validators.required),
@@ -71,6 +77,7 @@ export class CheckoutComponent implements OnInit {
 
         this.ordersService
             .createOrder({
+                orderId:this.shortId,
                 userId: _id,
                 products: covertData,
                 ...this.checkoutForm.value,
@@ -83,6 +90,7 @@ export class CheckoutComponent implements OnInit {
                     detail: 'Mua hàng thành công',
                     life: 3000,
                 });
-            });
+                this.cartService.deleteCart(_id).subscribe()
+            }); 
     }
 }
