@@ -12,7 +12,7 @@ export class UserLayoutComponent implements OnInit {
         
     }
     getUser: any = {};
-    user!: User;
+    user: any;
     // ngOnInit() {
     //     this.getUser = localStorage.getItem('user');
         // if (this.getUser) {
@@ -27,6 +27,7 @@ export class UserLayoutComponent implements OnInit {
   }
 
   ngDoCheck() {
+    console.log('a');
     this.getUserData();
   }
 
@@ -34,6 +35,9 @@ export class UserLayoutComponent implements OnInit {
     this.getUser = localStorage.getItem('user');
     if (this.getUser) {
         this.user = JSON.parse(localStorage.getItem('user') || '');
+    }
+    else{
+      this.user=null
     }
     // Gọi đoạn code cần thực hiện khi dữ liệu user thay đổi
     // Ví dụ: this.fetchUserData();
@@ -45,7 +49,6 @@ export class UserLayoutComponent implements OnInit {
             localStorage.removeItem('user');
             localStorage.removeItem('isAdmin');
             this.Router.navigate(['/login']);
-            location.reload()
         }
     }
 }
