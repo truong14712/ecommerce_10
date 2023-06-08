@@ -36,8 +36,7 @@ export class CategoryManagement implements OnInit {
     ngOnInit() {
         this.categoryService.getAllCategory().subscribe(
             (res) => {
-                this.products = res;
-                console.log(res);
+                this.products = res.data;
             },
             (err) => {
                 console.log(err);
@@ -131,11 +130,10 @@ export class CategoryManagement implements OnInit {
                 this.categoryService
                     .createCategory(this.product)
                     .subscribe((res) => {
-                        console.log(res)
-                        this.product = res.data;
+                        this.product = res;
                     });
                 this.categoryService.getAllCategory().subscribe((res) => {
-                    this.products = res;
+                    this.products = res.data;
                 });
                 // @ts-ignore
                 this.messageService.add({
