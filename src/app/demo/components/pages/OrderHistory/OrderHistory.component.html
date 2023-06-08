@@ -1,51 +1,63 @@
-<main class="p-5">  
-  
-  <div *ngIf="products.length===0">
-    <h2 class="">
-      Bạn chưa có đơn hàng nào
-    </h2>
-  </div>
-   <p-table *ngIf="products.length>0" able [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
-     <ng-template pTemplate="caption">
-       <h2 class="flex align-items-center justify-content-between">
-         Đặt hàng
-       </h2>
-   </ng-template>
-     <ng-template pTemplate="header">
-         <tr>
-          <th class="text-center">Tên người mua hàng</th>
-             <th class="text-center">Tên sản phẩm</th>
-             <th class="text-center">Ngày mua</th>
-             <th class="text-center">Ảnh</th>
-             <th class="text-center">Giá</th>
-             <th class="text-center">Số lượng</th>
-             <th class="text-center">Thành tiền</th>
-             <th class="text-center">Hình thức giao hàng</th>
-             <th class="text-center">Trạng thái</th>
-
-         </tr>
-     </ng-template>
-      <ng-template pTemplate="body" let-product>
-        <ng-container *ngFor="let item of product.products">
-        <tr>
-          <td class="text-center">{{product.name}}</td>
-            <td class="text-center">{{ item.name }}</td>
-            <td class="text-center">{{ product.createdAt }}</td>
-            <td class="text-center"><img src="{{ item.image }}" width="100" class="shadow-4" alt=""></td>
-            <td class="text-center">${{ item.price }}</td>
-            <td class="text-center">{{ item.quantity }}</td>
-            <td class="text-center">${{ item.totalPriceItem }}</td>
-            <!-- <td class="text-center">${{ product.totalPriceItem }}</td> -->
-            <td>{{ product.payment === 1 ? 'Thanh toán khi nhận hàng' : 'Thanh toán online' }}</td>
-            <td>{{ order_status[+item.status] }}</td>
-          </tr>
-        </ng-container>
-           
-     </ng-template>
- </p-table>
- <!-- <div  class="bg-white py-3 px-8 flex justify-content-between ">
+<main class="p-5">
+    <div *ngIf="products.length === 0">
+        <h2 class="">Bạn chưa có đơn hàng nào</h2>
+    </div>
+    <p-table
+        *ngIf="products.length > 0"
+        able
+        [value]="products"
+        [tableStyle]="{ 'min-width': '50rem' }"
+    >
+        <ng-template pTemplate="caption">
+            <h2 class="flex align-items-center justify-content-between">
+                Đặt hàng
+            </h2>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="text-center">Tên người mua hàng</th>
+                <th class="text-center">Tên sản phẩm</th>
+                <th class="text-center">Ngày mua</th>
+                <th class="text-center">Ảnh</th>
+                <th class="text-center">Giá</th>
+                <th class="text-center">Số lượng</th>
+                <th class="text-center">Thành tiền</th>
+                <th class="text-center">Hình thức giao hàng</th>
+                <th class="text-center">Trạng thái</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <ng-container *ngFor="let item of product.products">
+                <tr>
+                    <td class="text-center">{{ product.name }}</td>
+                    <td class="text-center">{{ item.name }}</td>
+                    <td class="text-center">{{ product.createdAt }}</td>
+                    <td class="text-center">
+                        <img
+                            src="{{ item.image }}"
+                            width="100"
+                            class="shadow-4"
+                            alt=""
+                        />
+                    </td>
+                    <td class="text-center">${{ item.price }}</td>
+                    <td class="text-center">{{ item.quantity }}</td>
+                    <td class="text-center">${{ item.totalPriceItem }}</td>
+                    <!-- <td class="text-center">${{ product.totalPriceItem }}</td> -->
+                    <td>
+                        {{
+                            product.payment === 1
+                                ? "Thanh toán khi nhận hàng"
+                                : "Thanh toán online"
+                        }}
+                    </td>
+                    <td>{{ order_status[+item.status] }}</td>
+                </tr>
+            </ng-container>
+        </ng-template>
+    </p-table>
+    <!-- <div  class="bg-white py-3 px-8 flex justify-content-between ">
      <p>Tổng tiền </p>
      <span>$ {{totalCart}}</span>
  </div>   -->
- 
 </main>

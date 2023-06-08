@@ -10,7 +10,7 @@ import { MessageService } from 'primeng/api';
     selector: 'app-checkout',
     templateUrl: './checkout.component.html',
     styleUrls: ['./checkout.component.scss'],
-    providers:[MessageService]
+    providers: [MessageService],
 })
 export class CheckoutComponent implements OnInit {
     constructor(
@@ -34,53 +34,55 @@ export class CheckoutComponent implements OnInit {
         const getUser = user ? JSON.parse(user) : null;
         if (!getUser) {
             this.router.navigate(['/login']);
-        }
-        this.cartService.getCartById(getUser._id).subscribe(
-            (res) => {
-                this.cartId = res?.cart._id;
-                const convertedArr = res?.cart?.products.map((item: any) => ({
-                    ...item.productId, // Lấy thông tin chi tiết của sản phẩm từ productId
-                    quantity: item.quantity,
-                    totalPriceItem:item.quantity *item.productId.price,
-                    // Thêm thuộc tính quantity vào đối tượng
-                }));
-                for (const item of convertedArr) {
-                    this.totalCart += item.price * item.quantity;
+        } else {
+            this.cartService.getCartById(getUser._id).subscribe(
+                (res) => {
+                    this.cartId = res?.cart._id;
+                    const convertedArr = res?.cart?.products.map(
+                        (item: any) => ({
+                            ...item.productId, // Lấy thông tin chi tiết của sản phẩm từ productId
+                            quantity: item.quantity,
+                            totalPriceItem:
+                                item.quantity * item.productId.price,
+                            // Thêm thuộc tính quantity vào đối tượng
+                        })
+                    );
+                    for (const item of convertedArr) {
+                        this.totalCart += item.price * item.quantity;
+                    }
+                    this.products = convertedArr;
+                },
+                (err) => {
+                    console.log(err);
                 }
-                this.products = convertedArr;
-            },
-            (err) => {
-                console.log(err);
-            }
-        );
+            );
+        }
     }
 
     handleSubmit() {
-      const {_id}=getUser()
+        const { _id } = getUser();
         this.submitted = true;
-        const covertData=this.products.map(item=>{
-          return {
-            productId:item._id,
-            quantity:item.quantity
-          }
-        })
+        const covertData = this.products.map((item) => {
+            return {
+                productId: item._id,
+                quantity: item.quantity,
+            };
+        });
 
-        this.ordersService.createOrder({
-          userId:_id,
-          products:covertData,
-          ...this.checkoutForm.value
-        }).subscribe(
-            (res)=>{
-                this.router.navigate(["orderHistory"])
+        this.ordersService
+            .createOrder({
+                userId: _id,
+                products: covertData,
+                ...this.checkoutForm.value,
+            })
+            .subscribe((res) => {
+                this.router.navigate(['orderHistory']);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
                     detail: 'Mua hàng thành công',
                     life: 3000,
                 });
-            }
-        )
+            });
     }
-
-    
 }

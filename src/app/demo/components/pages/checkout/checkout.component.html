@@ -1,68 +1,87 @@
-<main class="p-5">  
-
+<main class="p-5">
     <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
-      <ng-template pTemplate="caption">
-        <h2 class="flex align-items-center justify-content-between">
-          Đặt hàng
-        </h2>
-    </ng-template>
-      <ng-template pTemplate="header">
-          <tr>
-              <th class="text-center">Tên sản phẩm</th>
-              <th class="text-center">Ảnh</th>
-              <th class="text-center">Giá</th>
-              <th class="text-center">Số lượng</th>
-              <th class="text-center">Thành tiền</th>
-          </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-product>
-          <tr>
-              <td class="text-center">{{ product.name }}</td>
-              <td class="text-center"><img src="{{ product.image }}"  width="100" class="shadow-4" alt=""></td>
-              <td class="text-center">${{ product.price }}</td>
-              <td class="text-center">{{ product.quantity }}</td>
-              <td class="text-center">${{ product.totalPriceItem }}</td>
+        <ng-template pTemplate="caption">
+            <h2 class="flex align-items-center justify-content-between">
+                Đặt hàng
+            </h2>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="text-center">Tên sản phẩm</th>
+                <th class="text-center">Ảnh</th>
+                <th class="text-center">Giá</th>
+                <th class="text-center">Số lượng</th>
+                <th class="text-center">Thành tiền</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td class="text-center">{{ product.name }}</td>
+                <td class="text-center">
+                    <img
+                        src="{{ product.image }}"
+                        width="100"
+                        class="shadow-4"
+                        alt=""
+                    />
+                </td>
+                <td class="text-center">${{ product.price }}</td>
+                <td class="text-center">{{ product.quantity }}</td>
+                <td class="text-center">${{ product.totalPriceItem }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <div class="bg-white py-3 px-8 flex justify-content-between">
+        <p>Tổng tiền</p>
+        <span>$ {{ totalCart }}</span>
+    </div>
 
-          </tr>
-      </ng-template>
-  </p-table>
-  <div  class="bg-white py-3 px-8 flex justify-content-between ">
-      <p>Tổng tiền </p>
-      <span>$ {{totalCart}}</span>
-  </div>  
+    <h2>Thông tin người nhận</h2>
 
-<h2>Thông tin người nhận</h2>
+    <div class="card flex flex-column justify-content-center">
+        <form
+            class="card flex flex-column justify-content-center"
+            [formGroup]="checkoutForm"
+            (ngSubmit)="handleSubmit()"
+        >
+            <label htmlFor="name">Họ tên người nhận</label>
+            <input class="my-2" id="name" pInputText formControlName="name" />
+            <small
+                class="ng-dirty ng-invalid"
+                *ngIf="submitted && !checkoutForm.controls['name'].valid"
+                >Name is required.</small
+            >
 
-  <div class="card flex flex-column  justify-content-center">
-    <form class="card flex flex-column  justify-content-center"[formGroup]="checkoutForm"  (ngSubmit)="handleSubmit()">
-      <label htmlFor="name">Họ tên người nhận</label>
-      <input 
-      class="my-2" id="name" pInputText formControlName="name"   />
-      <small
-      class="ng-dirty ng-invalid"
-      *ngIf="submitted &&  !checkoutForm.controls['name'].valid"
-      >Name is required.</small
-      >
-      
-      <label htmlFor="phoneNumber">Số điện thoại</label>
-      <input 
-      class="my-2" id="phoneNumber" pInputText id="phoneNumber" formControlName="phoneNumber"  />
-  
-      <label htmlFor="address">Địa chỉ</label>
-      <input 
-      class="my-2" pInputText  id="address"formControlName="address"   />
+            <label htmlFor="phoneNumber">Số điện thoại</label>
+            <input
+                class="my-2"
+                id="phoneNumber"
+                pInputText
+                id="phoneNumber"
+                formControlName="phoneNumber"
+            />
 
-      <label htmlFor="payment">Phương thức thanh toán</label>
+            <label htmlFor="address">Địa chỉ</label>
+            <input
+                class="my-2"
+                pInputText
+                id="address"
+                formControlName="address"
+            />
 
-      <input 
-      class="my-2" pInputText readonly placeholder="Thanh toán khi nhận hàng
-      " id="payment"   />
+            <label htmlFor="payment">Phương thức thanh toán</label>
 
-      <div class="flex justify-content-end mt-3">
-        <p-button label="Thanh toán" type="submit" ></p-button>
-      </div>
-    </form>
-  
-</div>
-  
+            <input
+                class="my-2"
+                pInputText
+                readonly
+                placeholder="Thanh toán khi nhận hàng"
+                id="payment"
+            />
+
+            <div class="flex justify-content-end mt-3">
+                <p-button label="Thanh toán" type="submit"></p-button>
+            </div>
+        </form>
+    </div>
 </main>
