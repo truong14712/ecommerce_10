@@ -18,8 +18,7 @@ export class ProductDetailsComponent implements OnInit {
         private route: ActivatedRoute,
         private productService: ProductService,
         private cartService: CartService,
-        private router: Router,
-
+        private router: Router
     ) {}
     ngOnInit() {
         this.route.params.subscribe((params) => {
@@ -42,22 +41,22 @@ export class ProductDetailsComponent implements OnInit {
             }
         }
     }
-    addToCart(productId:string){
-        if(!getUser()?._id){
+    addToCart(productId: string) {
+        if (!getUser()?._id) {
             this.router.navigate(['/login']);
         }
-        const {_id}=getUser();
-        this.cartService.createCart({
-            userId:_id,
-            products:[
-               {
-                productId:productId,
-                quantity:1
-               }
-            ]
-        }).subscribe()
-        alert("Thêm sản phẩm vào giỏ hàng thành công")
+        const { _id } = getUser();
+        this.cartService
+            .createCart({
+                userId: _id,
+                products: [
+                    {
+                        productId: productId,
+                        quantity: 1,
+                    },
+                ],
+            })
+            .subscribe();
+        alert('Thêm sản phẩm vào giỏ hàng thành công');
     }
-
-    
 }

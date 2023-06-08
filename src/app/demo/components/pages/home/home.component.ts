@@ -4,6 +4,8 @@ import { ProductService } from 'src/app/demo/service/product.service';
 import { SelectItem } from 'primeng/api';
 import { DataView } from 'primeng/dataview';
 import { Router } from '@angular/router';
+import { getUser } from 'src/app/utils/getUser';
+import { CartService } from 'src/app/demo/service/cart.service';
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -12,7 +14,8 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
     constructor(
         private productService: ProductService,
-        private router: Router
+        private router: Router,
+        private cartService: CartService
     ) {}
     products: Product[] = [];
     sortOptions: SelectItem[] = [];
@@ -54,5 +57,23 @@ export class HomeComponent implements OnInit {
     }
     navigateToDetail(productId: string) {
         this.router.navigate(['products/detail', productId]);
+    }
+    addToCart(productId: string) {
+        if (!getUser()?._id) {
+            this.router.navigate(['/login']);
+        }
+        const { _id } = getUser();
+        this.cartService
+            .createCart({
+                userId: _id,
+                products: [
+                    {
+                        productId: productId,
+                        quantity: 1,
+                    },
+                ],
+            })
+            .subscribe();
+        alert('Thêm sản phẩm vào giỏ hàng thành công');
     }
 }
