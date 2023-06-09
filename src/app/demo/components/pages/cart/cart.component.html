@@ -1,34 +1,57 @@
-<div class="shopping-cart">
+<div class="shopping-cart" style="width: 800px">
     <!-- Title -->
     <div class="title">Giỏ hàng</div>
 
-    <div style="text-align: center;padding:20px;" *ngIf="products.length === 0">
-      <p>Không có sản phẩm nào trong giỏ hàng.</p>
+    <div
+        style="text-align: center; padding: 20px"
+        *ngIf="products.length === 0"
+    >
+        <p>Không có sản phẩm nào trong giỏ hàng.</p>
     </div>
     <div *ngIf="products.length > 0">
-      <div *ngFor="let product of products" class="item">
-      
-        <div class="image">
-          <img style="height:100px;width:100px" src={{product.image}} alt="" />
-        </div>
-      
-        <div class="description">
-          <span>{{ product.name }}</span>
-        </div>
-      
-        <div class="quantity">
-          <i class="pi pi-minus" style="font-size: 1rem" (click)="decreaseQuantity(product._id)"></i>
-          <input type="text" name="name" [value]="product.quantity" />
-          <i class="pi pi-plus" style="font-size: 1rem" (click)="increaseQuantity(product._id)"></i>
-        </div>
-      
-        <div class="total-price">$ {{ product.price }}</div>
-        <div class="delete" (click)="handleDeleteProduct(product._id)">Xoá</div>
-      </div>
-      <div style="display:flex;justify-content: flex-end;margin:10px">
-        <p-button label="Checkout" (click)="redirectCheckout()"></p-button>
-    </div>
-    </div>
- 
+        <div *ngFor="let product of products" class="item">
+            <div class="image">
+                <img
+                    style="height: 100px; width: 100px"
+                    src="{{ product.image }}"
+                    alt=""
+                />
+            </div>
 
+            <div class="description">
+                <span>{{ product.name }}</span>
+            </div>
+
+            <div class="quantity">
+                <i
+                    class="pi pi-minus"
+                    style="font-size: 1rem"
+                    (click)="decreaseQuantity(product._id)"
+                ></i>
+                <input type="text" name="name" [value]="product.quantity" />
+                <i
+                    class="pi pi-plus"
+                    style="font-size: 1rem"
+                    (click)="increaseQuantity(product._id)"
+                ></i>
+            </div>
+
+            <div class="total-price">$ {{ product.price }}</div>
+            <div class="delete" (click)="handleDeleteProduct(product._id)">
+                Xoá
+            </div>
+        </div>
+        <div
+            style="
+                display: flex;
+                justify-content: flex-end;
+                margin: 10px;
+                height: 55px;
+            "
+        >
+            <p-button label="Checkout" (click)="redirectCheckout()"
+            style="width: 130px"
+            ></p-button>
+        </div>
+    </div>
 </div>

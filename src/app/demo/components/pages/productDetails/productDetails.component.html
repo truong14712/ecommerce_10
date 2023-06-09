@@ -23,13 +23,15 @@
             </div>
 
             <div class="product-detail">
-                <h2 class="my-2">about this item:</h2>
                 <p>{{ product.description }}</p>
             </div>
 
             <div class="purchase-info">
                 <!-- <input type="number" min="1" value="1" /> -->
-                <button type="button" class="btn" (click)="addToCart(product._id)">Add to Cart</button>
+                <p-button
+                    label="Add to Cart"
+                    (click)="addToCart(product._id)"
+                ></p-button>
             </div>
         </div>
     </div>

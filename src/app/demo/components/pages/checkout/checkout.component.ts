@@ -90,7 +90,8 @@ export class CheckoutComponent implements OnInit {
                     detail: 'Mua hàng thành công',
                     life: 3000,
                 });
+                alert("Mua hàng thành công")
                 this.cartService.deleteCart(_id).subscribe()
-            }); 
+            });
     }
 }

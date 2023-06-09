@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             datasets: [
                 {
                     label: 'First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40],
+                    data: [40, 60, 80, 70, 56, 55, 65],
                     fill: false,
                     backgroundColor:
                         documentStyle.getPropertyValue('--bluegray-700'),

@@ -4,12 +4,17 @@
             <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
                 <form [formGroup]="formData" (ngSubmit)="handleSubmit()">
                     <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-                    <input id="email1" type="text" placeholder="Email address" pInputText class="w-full md:w-30rem mb-5"  style="padding:1rem"
+                    <input id="email1" type="text" placeholder="Email address" pInputText class="w-full md:w-30rem mb-2"  style="padding:1rem"
                     formControlName="email"
                     [ngClass]="{
                         'ng-invalid ng-dirty': submitted && !formData.controls['email'].valid
                     }">
-                   
+                    <div
+                    style="color:red"
+                    class="ng-dirty ng-invalid py-2"
+                    *ngIf="submitted &&  !formData.controls['email'].valid"
+                    >Email is required.</div
+                >
                     <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
                     <p-password id="password1"
                     placeholder="Password" [toggleMask]="true"
@@ -17,11 +22,12 @@
                     [ngClass]="{
                         'ng-invalid ng-dirty': submitted && !formData.controls['password'].valid
                     }"
-                    styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem" required></p-password>
-                    <small
-                    class="ng-dirty ng-invalid"
+                    styleClass="mb-2" inputStyleClass="w-full p-3 md:w-30rem" required></p-password>
+                    <div
+                    style="color:red"
+                    class="ng-dirty ng-invalid py-2"
                     *ngIf="submitted &&  !formData.controls['password'].valid"
-                    >Password is required.</small
+                    >Password is required.</div
                 >
                     <div class="flex align-items-center justify-content-between mb-5 gap-5">
                         <div class="flex align-items-center">

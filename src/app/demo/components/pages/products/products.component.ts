@@ -1,23 +1,27 @@
+import { CartService } from 'src/app/demo/service/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/demo/api/product';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { SelectItem } from 'primeng/api';
 import { DataView } from 'primeng/dataview';
 import { Router } from '@angular/router';
+import { getUser } from 'src/app/utils/getUser';
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+    selector: 'app-products',
+    templateUrl: './products.component.html',
+    styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-
-    constructor(private productService: ProductService,private router: Router) {}
+    constructor(
+        private productService: ProductService,
+        private router: Router,
+        private CartService: CartService
+    ) {}
     products: Product[] = [];
     sortOptions: SelectItem[] = [];
     sortOrder: number = 0;
 
     sortField: string = '';
-
 
     orderCities: any[] = [];
     ngOnInit() {
@@ -51,7 +55,23 @@ export class ProductsComponent implements OnInit {
         console.log(dv);
         dv.filter((event.target as HTMLInputElement).value);
     }
-    navigateToDetail(productId:string){
+    navigateToDetail(productId: string) {
         this.router.navigate(['products/detail', productId]);
+    }
+    addToCart(productId: string) {
+        if (!getUser()?._id) {
+            this.router.navigate(['/login']);
+        }
+        const { _id } = getUser();
+        this.CartService.createCart({
+            userId: _id,
+            products: [
+                {
+                    productId: productId,
+                    quantity: 1,
+                },
+            ],
+        }).subscribe();
+        alert('Thêm sản phẩm vào giỏ hàng thành công');
     }
 }
